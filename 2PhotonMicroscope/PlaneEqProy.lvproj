@@ -10,6 +10,7 @@
 		<Property Name="server.vi.callsEnabled" Type="Bool">true</Property>
 		<Property Name="server.vi.propertiesEnabled" Type="Bool">true</Property>
 		<Property Name="specify.custom.address" Type="Bool">false</Property>
+		<Item Name="controlPanel.vi" Type="VI" URL="../controlPanel.vi"/>
 		<Item Name="GeneratePlaneEquation.vi" Type="VI" URL="../GeneratePlaneEquation.vi"/>
 		<Item Name="main.vi" Type="VI" URL="../main.vi"/>
 		<Item Name="RelativePos.vi" Type="VI" URL="../RelativePos.vi"/>
@@ -87,6 +88,7 @@
 			<Item Name="Select host address.vi" Type="VI" URL="../../Low Level/Communication.llb/Select host address.vi"/>
 			<Item Name="Select USB device.vi" Type="VI" URL="../../Low Level/Communication.llb/Select USB device.vi"/>
 			<Item Name="Select values for chosen axes.vi" Type="VI" URL="../../Low Level/Support.llb/Select values for chosen axes.vi"/>
+			<Item Name="setUp.vi" Type="VI" URL="../setUp.vi"/>
 			<Item Name="SetUpE727.vi" Type="VI" URL="../SetUpE727.vi"/>
 			<Item Name="STA?.vi" Type="VI" URL="../../Low Level/Special command.llb/STA?.vi"/>
 			<Item Name="String with ASCII code conversion.vi" Type="VI" URL="../../Low Level/Support.llb/String with ASCII code conversion.vi"/>
