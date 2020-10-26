@@ -13,16 +13,16 @@ We have a top level Vi called  controlPanel.vi , inside we have the 3 principal 
 The setUp.vi is in charge of configuring and establishing communication with the controller E-727. 
 
 Inputs:
-(bool) Simulation/live 
-(bool) Stop
+- (bool) Simulation/live 
+- (bool) Stop
 
 
 
 Outputs:
-(int) System ID 
-(bool) Ready 
-(array of strings) Axis ID 
-Error
+- int) System ID 
+- (bool) Ready 
+- (array of strings) Axis ID 
+- Error
 
 ### 2. Main
 
@@ -31,16 +31,16 @@ The Main.vi contains the algorithms need it to achieve the automated process of 
 
 inputs:
 
-(array of strings) Axis ID 
-(double) Zaxis Step Size 
-(bool) Simulation/ live
+- (array of strings) Axis ID 
+- (double) Zaxis Step Size 
+- (bool) Simulation/ live
 
 outputs:
-(array of doubles) NormalVector
-(array of doubles) Position
-(3X3 matrix) Three Points 
-(double) D
-(string) Equation
+- (array of doubles) NormalVector
+- (array of doubles) Position
+- (3X3 matrix) Three Points 
+- (double) D
+- (string) Equation
 
 
 
@@ -51,11 +51,11 @@ The Clean.vi is in charge of closing all communication sessions, saving somo dat
 
 
 inputs:
-(bool) Simulation/live
-(int) System ID
+- (bool) Simulation/live
+- (int) System ID
 
 outputs:
-Error Out
+- Error Out
 
 
 # Hardware
