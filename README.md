@@ -2,7 +2,6 @@
 This project contains a LabView code in order to control the PI piezo stage using an E-727 controller. The goal of this 2pp project is to achieve automated microfabrication of micro and nano structures. 
 
 
-
 # Structure
 
 We have a top level Vi called  controlPanel.vi , inside we have the 3 principal Vi’s 
