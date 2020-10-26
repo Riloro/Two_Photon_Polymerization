@@ -62,3 +62,6 @@ outputs:
 Multi-Axis Piezo Scanner datasheet : https://www.pi-usa.us/en/products/piezo-flexure-nanopositioners/xyz-piezo-flexure-nanopositioning-stages/p-517-p-527-multi-axis-piezo-scanner-201500/
 
 Digital Multi-Channel Piezo Controller E-727 datasheet: https://www.physikinstrumente.com/en/products/controllers-and-drivers/nanopositioning-piezo-controllers/e-727x-e-727xp-digital-multi-channel-piezo-controller-412418442/
+
+This project is using some libraries created by PI that need to establish communication with the controller. Then,  some drivers need to be installed in your computer before trying to run the code. The drivers are available at:
+https://drive.google.com/file/d/1nRj-p3xKw2nbn8gxaCwC54BoCWYw-gaP/view?usp=sharing
