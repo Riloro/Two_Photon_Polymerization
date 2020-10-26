@@ -32,8 +32,8 @@ function twoPhotonPolySimulation()
     
     %---------------------------Polygon-----------------------------%
     ref_point = [5,0,0];
-    n_sides = 6;
-    R = 2 ;
+    n_sides = 4;
+    R = 4 ;
     res = 1;
     polygon(n_sides,R, ref_point, res);
     %----------------Calculating the normal vector components---------------
@@ -205,14 +205,12 @@ function polygon(n_sides,R, ref_point, resolution)
     for k = 1 : n_sides
         
         figure(3)
-        plot3(position(k,1),position(k,2),position(k,3),'-o','Color',[1 0 1],'MarkerSize',...
+        plot3(position(k,1),position(k,2),position(k,3),'o','Color',[1 0 1],'MarkerSize',...
             5,'MarkerFaceColor','b');
         xlabel("X")
         ylabel("Y")
         grid on
         hold on
-        
-       
       
 %         figure(4)
 %         plot(position(k,1),position(k,2),'o','Color',[1 0 1],'MarkerSize',...
@@ -252,51 +250,51 @@ function polygon(n_sides,R, ref_point, resolution)
     magnitude = false;
     i = 1;
     
-%     
-% for i = 1 : n_sides
-%         
-%         j = 2;
-%         u = unitaryVectors(i,:) ; 
-%         u(4) = 1;
-%         x = position(i,1);
-%         y = position(i,2);
-%         z = position(i,3);
-%         
-%         utrans = translation(x,y,z);
-%         utras = transpose(utrans);
-%         V = resolution * utras ;%+ [1,1,0];
-%         disp("V...")
-%         V = transpose(V);
-%         disp(V);
-%         disp(position(1,:))
-%         plot3(V(1),V(2),V(3),'o','Color',[1 0 1],'MarkerSize',...
-%              5,'MarkerFaceColor',[1 0 1]);
-%          V = j*V;
-%          plot3(V(1),V(2),V(3),'o','Color',[1 0 1],'MarkerSize',...
-%              5,'MarkerFaceColor',[1 0 1]);
-%         while magnitude == false
-%             
-%             if norm(V) <= mag(i)
-%                 V = j*V ;
-%                 pointsMatrix(j,:) = V;
-%             else
-%                 magnitude = true;   %Overpass or the vector reach the desired Magnitude
-% 
-%             end   
-%             j = j + 1;
-%         end  
-%         
-%         %Writing the points ...
-%         for k = 1 : j            
-%             plot3(pointsMatrix(k,1),pointsMatrix(k,2),pointsMatrix(k,3),'o','Color',[1 0 1],'MarkerSize',...
-%             5,'MarkerFaceColor',[1 0 1]);            
-%         end
-%         
-%     end
+    
+for i = 1 : n_sides
+        
+        j = 2;
+        u = unitaryVectors(i,:) ; 
+        u(4) = 1;
+        x = position(i,1);
+        y = position(i,2);
+        z = position(i,3);
+        
+        utrans = translation(x,y,z);
+        utras = transpose(utrans);
+        V = resolution * utras ;%+ [1,1,0];
+        disp("V...")
+        V = transpose(V);
+        disp(V);
+        disp(position(1,:))
+        plot3(V(1),V(2),V(3),'o','Color',[1 0 1],'MarkerSize',...
+             5,'MarkerFaceColor',[1 0 1]);
+         V = j*V;
+         plot3(V(1),V(2),V(3),'o','Color',[1 0 1],'MarkerSize',...
+             5,'MarkerFaceColor',[1 0 1]);
+        while magnitude == false
+            
+            if norm(V) <= mag(i)
+                V = j*V ;
+                pointsMatrix(j,:) = V;
+            else
+                magnitude = true;   %Overpass or the vector reach the desired Magnitude
+
+            end   
+            j = j + 1;
+        end  
+        
+        %Writing the points ...
+        for k = 1 : j            
+            plot3(pointsMatrix(k,1),pointsMatrix(k,2),pointsMatrix(k,3),'o','Color',[1 0 1],'MarkerSize',...
+            5,'MarkerFaceColor',[1 0 1]);            
+        end
+        
+    end
     
     disp("Unitary Vectors ...")
     disp(unitaryVectors); 
-    
+       
 end
 
 

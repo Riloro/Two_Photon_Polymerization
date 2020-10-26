@@ -23,6 +23,11 @@ Outputs:
 - (array of strings) Axis ID 
 - Error
 
+#### Example
+
+![alt text](https://github.com/Riloro/Two_Photon_Polymerization/blob/master/images/imag2.PNG?raw=true)
+![alt text](https://github.com/Riloro/Two_Photon_Polymerization/blob/master/images/imag3.PNG?raw=true)
+
 ### 2. Main
 
 The Main.vi contains the algorithms need it to achieve the automated process of micro fabrication  (inputs and outputs could change along development)
