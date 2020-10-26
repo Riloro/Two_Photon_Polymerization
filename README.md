@@ -8,7 +8,7 @@ This project contains a LabView code in order to control the PI piezo stage usin
 We have a top level Vi called  controlPanel.vi , inside we have the 3 principal Vi’s 
 
 
-###### 1. SetUp
+## 1. SetUp
 
 The setUp.vi is in charge of configuring and establishing communication with the controller E-727. 
 
@@ -24,7 +24,7 @@ Outputs:
 (array of strings) Axis ID 
 Error
 
-###### 2. Main
+### 2. Main
 
 The Main.vi contains the algorithms need it to achieve the automated process of micro fabrication  (inputs and outputs could change along development)
 
@@ -45,7 +45,7 @@ outputs:
 
 
 
-###### 3. Clean
+##### 3. Clean
 
 The Clean.vi is in charge of closing all communication sessions, saving somo data in .txt files and clearing some variables.
 
