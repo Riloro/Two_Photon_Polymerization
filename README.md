@@ -56,6 +56,7 @@ inputs:
 outputs:
 - Error Out
 
+![alt text](https://github.com/Riloro/Two_Photon_Polymerization/blob/master/image1.PNG?raw=true)
 
 # Hardware
 Multi-Axis Piezo Scanner datasheet : https://www.pi-usa.us/en/products/piezo-flexure-nanopositioners/xyz-piezo-flexure-nanopositioning-stages/p-517-p-527-multi-axis-piezo-scanner-201500/
