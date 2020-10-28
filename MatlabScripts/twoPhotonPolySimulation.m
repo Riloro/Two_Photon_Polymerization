@@ -32,10 +32,11 @@ function twoPhotonPolySimulation()
     
     %---------------------------Polygon-----------------------------%
     ref_point = [5,0,0];
-    n_sides = 6;
+    n_sides = 100;
     R = 2 ;
-    res = 1;
+    res = 0.1;
     polygon(n_sides,R, ref_point, res);
+    
     %----------------Calculating the normal vector components---------------
     
      
@@ -99,7 +100,7 @@ function twoPhotonPolySimulation()
        plot3(mesuredPoints(i,1),mesuredPoints(i,2),mesuredPoints(i,3),'o','Color','r','MarkerSize',5,'MarkerFaceColor','r');        
     end
    
-    plot3(0,0,10,'*','Color',[1 0 1],'MarkerSize',10,'MarkerFaceColor','b');
+    plot3(0,0,10,'*','Color',[1 0 1],'MarkerSize',10,'MarkerFaceColor','b');   % Focal Objective´s point
     
     
     
@@ -122,11 +123,13 @@ function twoPhotonPolySimulation()
         t_z = 0;
         t_x = -Pup(1);
         t_y = -Pup(2);
-        T = [1,0,0,t_x;0,1,0,t_y;0,0,1,t_z;0,0,0,1]; % Transformation Matrix T....
-        Ptras = T * transpose(Pup);
+      %  T = [1,0,0,t_x;0,1,0,t_y;0,0,1,t_z;0,0,0,1]; % Transformation Matrix T....
+        
+        Ptras = translation(t_x,t_y,t_z,Pup); %T * transpose(Pup);
         plot3(Ptras(1,1),Ptras(2,1),Ptras(3,1),'o','Color',[1 0 1],'MarkerSize',5,'MarkerFaceColor',[1 0 1]); %Ploting update after translation
         pause on    
         counter = 1;
+        
         for i = 1 : length(X)
             for j = 1 : length(X)  
                 
@@ -134,7 +137,7 @@ function twoPhotonPolySimulation()
                 phi(2,1) = Y(j,i);
                 phi(3,1) = Z(j,i);
                 
-                phiPrime(:,counter) = T * phi;   % Translated Points  phiPrime.....
+                phiPrime(:,counter) = translation(t_x,t_y,t_z,phi);  %T * phi;   % Translated Points  phiPrime.....
             
                 xPrime = phiPrime(1,counter);
                 yPrime = phiPrime(2,counter);
@@ -150,24 +153,24 @@ function twoPhotonPolySimulation()
             end    
         end
         P = [40, 50,0,1];
-        Pnew = T * transpose(P);
+        Pnew = translation(t_x,t_y,t_z,transpose(P)); %T * transpose(P);
         plot3(Pnew(1,1),Pnew(2,1),Pnew(3,1),'o','Color',[1 0 1],'MarkerSize',5,'MarkerFaceColor',[1 0 1])
        
         if up == true    
-            sz = size(phiPrime); % N*N puntos
+            sz = size(phiPrime); % N*N points
             
-            t_z = 10 - Pup(3);  % Z translation is given by the subtraction between the "Tip" z position and zP
+            t_z = 10 - Pup(3);  % Z translation is given by the subtraction between the "Objective's focal point" z position and zP
             t_x = 0;
             t_y = 0;
-            T_2 = [1,0,0,t_x;0,1,0,t_y;0,0,1,t_z;0,0,0,1]; % Transformation Matrix T....
+            %T_2 = [1,0,0,t_x;0,1,0,t_y;0,0,1,t_z;0,0,0,1]; % Transformation Matrix T....
             
-            PtrasNew = T_2 * Ptras;
+            PtrasNew = translation(t_x,t_y,t_z,Ptras); %T_2 * Ptras;
             phiPrime2 = ones(4,length(X));
             z_0 = 0;
             
             for j = 1 : sz(2)
                 
-                phiPrime2(:,j) = T_2 * phiPrime(:,j); %Linear transformation
+                phiPrime2(:,j) = translation(t_x,t_y,t_z,phiPrime(:,j)); %T_2 * phiPrime(:,j); %Linear transformation
                 
                 xPrime2 = phiPrime2(1,j);
                 yPrime2 = phiPrime2(2,j);
@@ -188,39 +191,47 @@ end
 
 function polygon(n_sides,R, ref_point, resolution)
     
-    coordinates = zeros(n_sides,2);
-    position = zeros(1,3);
     
-    for i = 1 : n_sides 
-        
-        phi = (i - 1) * (2*pi/n_sides) ; 
-        position(i,1) = ref_point(1) + R*cos(phi);
-        position(i,2) = ref_point(2) + R*sin(phi);      
-        position(i,3) = 0;
-        
-    end
-    
-   
-    
-    for k = 1 : n_sides
-        
-        figure(3)
-        plot3(position(k,1),position(k,2),position(k,3),'-o','Color',[1 0 1],'MarkerSize',...
-            5,'MarkerFaceColor','b');
-        xlabel("X")
-        ylabel("Y")
-        grid on
-        hold on
-        
-       
-      
-%         figure(4)
-%         plot(position(k,1),position(k,2),'o','Color',[1 0 1],'MarkerSize',...
-%             5,'MarkerFaceColor',[1 0 1]);
-%         
-%         grid on
-%         hold on
-%         
+    z = 0;
+    N = 4;  % Number of planes 
+
+    for m = 1 : N
+        coordinates = zeros(n_sides,2);
+        position = zeros(1,3);  
+        for i = 1 : n_sides 
+
+            phi = (i - 1) * (2*pi/n_sides) ;                % Computing the vertices position 
+            position(i,1) = ref_point(1) + R*cos(phi);
+            position(i,2) = ref_point(2) + R*sin(phi);      
+            position(i,3) = z;
+
+        end
+
+
+
+        for k = 1 : n_sides
+
+            figure(3)
+            plot3(position(k,1),position(k,2),position(k,3),'-o','Color',[1 0 1],'MarkerSize',...
+                5,'MarkerFaceColor','b');
+            xlabel("X")
+            ylabel("Y")
+            zlabel("Z")
+            title("Printing Polygons")
+            grid on
+            hold on
+
+
+
+    %         figure(4)
+    %         plot(position(k,1),position(k,2),'o','Color',[1 0 1],'MarkerSize',...
+    %             5,'MarkerFaceColor',[1 0 1]);
+    %         
+    %         grid on
+    %         hold on
+    %         
+        end
+        z = 0 + m*resolution ;
     end
     
     U = zeros(1,3);
@@ -301,12 +312,18 @@ end
 
 
 
-function utras = translation(x,y,z)
+function uNew = translation(x,y,z,u)
     
+        sz = size(u);
         t_z = z;
         t_x = x;
         t_y = y;
         T = [1,0,0,t_x;0,1,0,t_y;0,0,1,t_z;0,0,0,1]; % Transformation Matrix T....
-        utras = T * transpose(u);
+        
+        if sz(1) > 1
+            uNew = T * u ;           
+        else
+            uNew = T * transpose(u);
+        end
 
 end
