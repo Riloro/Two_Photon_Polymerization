@@ -37,40 +37,14 @@ function twoPhotonPolySimulation()
     res = 0.1;
     polygon(n_sides,R, ref_point, res);
     %.......................................Writing a 3D line.................................................%
-    r = [100,0,0];     % final point
-    r_0 = [1,0,0];   % initial point 
-    t = 0;           % line parameter
-    
-    figure(5)
-    writingLine(r,r_0,t);  %initial point
-    xlabel("X ($\mu m$)")
-    ylabel("Y($\mu m$)")
-    zlabel("Z($\mu m$)")
-    title("3D line")
-    xlim([-120,120]);
-    ylim([-120,120]);
-    zlim([-20,20]);
-    grid on
+    r_0 = [1,0,0];
+    r = [90,50,5];
+    resolution = 0.5; % um
+    lineConstruction(r_0,r,resolution)
     hold on
-    
-    counterLine = 1;
-    resolution = 0.5;    %line resolution
-    
-    % computing the number of points  between r_0 and r 
-    numberOfPoints = norm(r - r_0)/resolution ;
-    disp("Number of point on the line = "+ numberOfPoints)
-    for i = 1 : numberOfPoints    
-        
-        t2 = resolution*i ;
-        % Distance between each point (line resolution)
-        if counterLine == 1
-            vector =   writingLine(r,r_0,t2) - r_0 ;
-            disp("Magnitud = "+ norm(vector));
-        end        
-        writingLine(r,r_0,t2); 
-        counterLine = counterLine + 1;
-    end
-
+    r_0 = [1,0,0];
+    r = [90,50,-5];
+    lineConstruction(r_0,r,resolution)
     %----------------Calculating the normal vector components---------------
     
      
@@ -344,7 +318,45 @@ function polygon(n_sides,R, ref_point, resolution)
     
 end
 
+function lineConstruction(R_0,R, res)
 
+
+    r = R;     % final point
+    r_0 = R_0;   % initial point 
+    t = 0;           % line parameter
+    
+    figure(5)
+    writingLine(r,r_0,t);  %initial point
+    xlabel("X ($\mu m$)")
+    ylabel("Y($\mu m$)")
+    zlabel("Z($\mu m$)")
+    title("3D line")
+    xlim([-120,120]);
+    ylim([-120,120]);
+    zlim([-20,20]);
+    grid on
+    hold on
+    
+    counterLine = 1;
+    resolution = res;    %line resolution
+    
+    % computing the number of points  between r_0 and r 
+    numberOfPoints = norm(r - r_0)/resolution ;
+    disp("Number of point on the line = "+ numberOfPoints)
+    for i = 1 : numberOfPoints    
+        
+        t2 = resolution*i ;
+        % Distance between each point (line resolution)
+        if counterLine == 1
+            vector =   writingLine(r,r_0,t2) - r_0 ;
+            disp("Magnitud = "+ norm(vector));
+        end        
+        writingLine(r,r_0,t2); 
+        counterLine = counterLine + 1;
+    end
+
+
+end
 
 function v =  writingLine(r,r_0,t)
 
