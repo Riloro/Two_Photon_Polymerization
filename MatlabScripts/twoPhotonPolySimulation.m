@@ -20,7 +20,7 @@ function twoPhotonPolySimulation()
     close all;
     set(0,'defaultTextInterpreter','latex');   
     
-    move = false;
+    move = true;
     up = true;
     animation = false;
     view90 = false;
@@ -35,25 +35,25 @@ function twoPhotonPolySimulation()
     n_sides = 3;
     R = 2 ;
     res = 0.1;
-    polygon(n_sides,R, ref_point, res); 
+   % polygon(n_sides,R, ref_point, res); 
     %.......................................Writing a 3D line.................................................%
     r_0 = [1,0,0];
     r = [90,50,5];
     resolution = 4; % um      resolution
-    lineConstruction(r_0,r,resolution,6)
+    %lineConstruction(r_0,r,resolution,6)
     hold on
     r_0 = [1,0,0];
     r = [90,50,-5];
-    lineConstruction(r_0,r,resolution,6)
+    %lineConstruction(r_0,r,resolution,6)
     
-    % ......................Building a cube....................
+    % ......................Building a cube................................
     v1 = [-50,50,0];
     v2 = [50,50,0];
     v3 = [-50,-50,0];
     v4 = [50,-50,0];
     deltaX = resolution;
     h = 20;
-    cube(v1,v2,v3,v4,deltaX,resolution,h)
+    %cube(v1,v2,v3,v4,deltaX,resolution,h)
     %----------------Calculating the normal vector components---------------............   
      
 
@@ -103,7 +103,7 @@ function twoPhotonPolySimulation()
     xlabel('X $(\mu m)$');
     ylabel('Y $(\mu m)$');
     zlabel('Z $(\mu m)$');
-    title("Piezo stage Position and Imaginary Plane")
+    title("Piezo stage and substrate-sample plane")
     xlim([-120,120]);
     ylim([-120,120]);
     zlim([-20,20]);
@@ -387,8 +387,7 @@ function lineConstruction(R_0,R, res,figNum)
     counterLine = 1;
     resolution = res;    %line resolution
     
-    % computing the number of points  between r_0 and r 
-    
+    % computing the number of points  between r_0 and r     
     numberOfPoints = norm(r - r_0)/resolution ;
     disp("Number of points on the line = "+ numberOfPoints)
     for i = 1 : numberOfPoints    

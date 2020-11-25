@@ -18,7 +18,7 @@ Inputs:
 
 
 Outputs:
-- int) System ID 
+- (int) System ID 
 - (bool) Ready 
 - (array of strings) Axis ID 
 - Error
